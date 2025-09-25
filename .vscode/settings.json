@@ -11,7 +11,7 @@
         "editor.indentSize": "tabSize",
         "editor.detectIndentation": false
     },
-    "[ts]": {
+    "[typescript]": {
         "editor.defaultFormatter": "denoland.vscode-deno",
         "editor.tabSize": 4,
         "editor.indentSize": "tabSize",
