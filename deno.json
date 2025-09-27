@@ -9,5 +9,12 @@
     "fmt": {
         "indentWidth": 4,
         "lineWidth": 120
+    },
+    "permissions": {
+        "default": {
+            "env": true,
+            "read": true,
+            "net": true
+        }
     }
 }
