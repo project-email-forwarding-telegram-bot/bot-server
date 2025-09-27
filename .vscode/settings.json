@@ -16,5 +16,11 @@
         "editor.tabSize": 4,
         "editor.indentSize": "tabSize",
         "editor.detectIndentation": false
-    }
+    },
+    "[yaml]": {
+        "editor.tabSize": 4,
+        "editor.indentSize": "tabSize",
+        "editor.detectIndentation": false
+    },
+    "postman.settings.dotenv-detection-notification-visibility": false
 }
