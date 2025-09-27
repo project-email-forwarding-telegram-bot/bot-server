@@ -1,3 +1,3 @@
 export const global = {
-    WEBHOOK_PORT: 8080,
+    WEBHOOK_PORT: 8443,
 };
