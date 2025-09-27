@@ -16,8 +16,14 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v5
 
+            - name: Echo `actor` and `actor_id`
+              run: "echo Actor: ${{ github.actor }} | Actor ID: ${{ github.actor_id }}"
+
             - name: Log in to the `Github Container Registry`
               uses: docker/login-action@v3
+              with:
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Build and push
               uses: docker/build-push-action@v6
