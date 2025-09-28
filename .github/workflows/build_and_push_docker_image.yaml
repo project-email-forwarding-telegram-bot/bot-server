@@ -28,9 +28,6 @@ jobs:
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Echo user
-              run: whoami
-
             - name: Docker metadata
               uses: docker/metadata-action@v5
               id: meta
@@ -39,10 +36,6 @@ jobs:
                   tags: |
                       type=raw,value=latest
                       type=raw,value={{ branch }}_{{ date 'YYYY-MM-DD' tz='Asia/Kolkata' }}_0x{{ sha }}
-
-            - name: Echo `tags`
-              run: |
-                  echo ${{ steps.meta.outputs.tags }}
 
             - name: Build and push
               uses: docker/build-push-action@v6
