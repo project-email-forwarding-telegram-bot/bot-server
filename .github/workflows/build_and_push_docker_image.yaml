@@ -12,6 +12,7 @@ jobs:
     build-and-push-image:
         runs-on: ["Linux", "self-hosted"]
         permissions:
+            contents: read
             packages: write
 
         steps:
