@@ -1,4 +1,6 @@
 {
+    "name": "bot-server",
+    "version": "1.0.0",
     "tasks": {
         "dev": "deno run --env-file --allow-env --allow-net --watch src/main.ts"
     },

@@ -44,3 +44,5 @@ jobs:
                   context: .
                   file: ./dockerfile
                   tags: ${{ steps.meta.outputs.tags }}
+                  build-args:
+                      - COMMIT_SHA=${{ github.sha }}

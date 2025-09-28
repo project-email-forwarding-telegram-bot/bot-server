@@ -2,6 +2,9 @@ FROM denoland/deno:debian
 
 WORKDIR /bot_server
 
+ARG COMMIT_SHA
+ENV COMMIT_SHA=${COMMIT_SHA}
+
 COPY . .
 
 EXPOSE 8443

@@ -1,10 +1,24 @@
 import { global } from "../global.ts";
 
 Deno.serve({ port: global.WEBHOOK_PORT, hostname: "0.0.0.0" }, async (req) => {
-    console.log("url: ", req.url);
+    const url = new URL(req.url);
+    console.log("url: ", url.toString());
 
-    const jsonBody = await req.json();
-    console.log("jsonBody: ", jsonBody);
+    if (url.pathname == "/health") {
+        return new Response(JSON.stringify({ version: "1.0.0", commitSHA: global.COMMIT_SHA }), {
+            status: 200,
+            headers: {
+                "content-type": "application/json",
+            },
+        });
+    }
 
-    return new Response("", { status: 200 });
+    try {
+        const jsonBody = await req.json();
+        console.log("jsonBody: ", jsonBody);
+
+        return new Response("", { status: 200 });
+    } catch (e: unknown) {
+        return new Response("", { status: 400 });
+    }
 });
