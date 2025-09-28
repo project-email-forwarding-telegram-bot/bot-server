@@ -11,6 +11,8 @@ env:
 jobs:
     build-and-push-image:
         runs-on: ["Linux", "self-hosted"]
+        permissions:
+            packages: write
 
         steps:
             - name: Checkout repository
