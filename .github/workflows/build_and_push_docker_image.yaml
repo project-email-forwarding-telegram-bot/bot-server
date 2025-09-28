@@ -6,7 +6,7 @@ on:
 
 env:
     REGISTRY: ghcr.io
-    IMAGE_NAME: bot-server:${{ github.repository }}
+    IMAGE_NAME: bot-server:${{ github.sha }}
 
 jobs:
     build-and-push-image:
