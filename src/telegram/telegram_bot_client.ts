@@ -24,10 +24,11 @@ class telegram_bot_client {
 
             if (params != null) {
                 for (const [key, value] of Object.entries(params)) {
-                    url.searchParams.append(key, value);
+                    url.searchParams.append(key, value.toString());
                 }
             }
 
+            console.log("url:", url.toString());
             const response = await fetch(url, {
                 method: request.method,
             });
