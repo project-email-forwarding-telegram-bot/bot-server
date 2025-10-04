@@ -5,7 +5,7 @@ Deno.serve({ port: global.WEBHOOK_PORT, hostname: "0.0.0.0" }, async (req) => {
     console.log("url: ", url.toString());
 
     if (url.pathname == "/health") {
-        return new Response(JSON.stringify({ version: "1.0.0", commitSHA: global.COMMIT_SHA }), {
+        return new Response(JSON.stringify({ version: global.version, commit_sha: global.commit_sha }, null, 4), {
             status: 200,
             headers: {
                 "content-type": "application/json",

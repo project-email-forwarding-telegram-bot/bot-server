@@ -4,6 +4,7 @@ import { telegram_bot_client } from "./telegram/telegram_bot_client.ts";
 import { enum_secret_manager_key } from "./utils/secret_manager.ts";
 import { enum_environment } from "./enum.ts";
 import { kv_store } from "./utils/kv_store.ts";
+import { ExistsCommand } from "@upstash/redis";
 
 const environment = Deno.env.get("ENVIRONMENT");
 
@@ -45,11 +46,37 @@ if (upstash_redis_rest_token == null) {
     Deno.exit(-10);
 }
 
+let commit_sha: string;
+
+if (environment == "local") {
+    const command = new Deno.Command("git", { "args": ["rev-parse", "HEAD"] });
+    const command_output = command.outputSync();
+
+    if (command_output.success) {
+        const data = command_output.stdout;
+        const decoder = new TextDecoder("utf-8");
+        commit_sha = decoder.decode(data).trim();
+    } else {
+        console.error(`Failed to run command \`git rev-parse HEAD\``);
+        Deno.exit(-10);
+    }
+} else {
+    const commit_sha_env = Deno.env.get("COMMIT_SHA");
+
+    if (commit_sha_env == null) {
+        console.error(`Env variable \`COMMIT_SHA\` not found`);
+        Deno.exit(-10);
+    }
+
+    commit_sha = commit_sha_env;
+}
+
 export const global = {
     WEBHOOK_PORT: 8443,
-    COMMIT_SHA: Deno.env.get("COMMIT_SHA"),
-    VERSION: config.version,
+    commit_sha,
+    version: config.version,
     HOSTNAME: "ip.email-forwarding-telegram-bot.cfd",
+    environment,
     config,
     global_secret_manager,
     telegram_bot_client: new telegram_bot_client(telegram_bot_api_base_url, telegram_bot_token),
