@@ -16,9 +16,8 @@ Deno.serve({ port: global.WEBHOOK_PORT, hostname: "0.0.0.0" }, async (req) => {
     try {
         const jsonBody = await req.json();
         console.log("jsonBody: ", jsonBody);
-
-        return new Response("", { status: 200 });
-    } catch (e: unknown) {
-        return new Response("", { status: 400 });
+        return new Response(null, { status: 200 });
+    } catch (_e: unknown) {
+        return new Response(null, { status: 400 });
     }
 });
