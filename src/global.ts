@@ -49,7 +49,7 @@ export const global = {
     WEBHOOK_PORT: 8443,
     COMMIT_SHA: Deno.env.get("COMMIT_SHA"),
     VERSION: config.version,
-    HOSTNAME: "https://project-email-forwarding-telegram-bot.cfd",
+    HOSTNAME: "ip.email-forwarding-telegram-bot.cfd",
     config,
     global_secret_manager,
     telegram_bot_client: new telegram_bot_client(telegram_bot_api_base_url, telegram_bot_token),
