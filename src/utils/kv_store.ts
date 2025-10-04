@@ -12,14 +12,16 @@ class kv_store {
     }
 
     async set(key: string, value: unknown): Promise<void> {
-        await this.redis.set(key, JSON.stringify(value));
+        await this.redis.set(key, value);
+        console.log("kv_store set value:", value);
     }
 
     async get(key: string): Promise<unknown | null> {
-        const value = await this.redis.get(key) as string;
+        const value = await this.redis.get<string>(key);
+        console.log("kv_store get value:", value);
 
         if (value != null) {
-            return JSON.parse(value);
+            return value;
         }
     }
 }
