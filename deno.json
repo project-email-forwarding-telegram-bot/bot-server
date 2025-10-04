@@ -18,7 +18,8 @@
         "default": {
             "env": true,
             "read": true,
-            "net": true
+            "net": true,
+            "run": true
         }
     }
 }
