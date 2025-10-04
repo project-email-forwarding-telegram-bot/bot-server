@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+    application:
+        image: ghcr.io/project-email-forwarding-telegram-bot/bot-server:latest
+        ports:
+            - "8443:8443"
+
+        secrets:
+            - UPSTACK_REDIS_REST_TOKEN
+            - TELEGRAM_BOT_TOKEN
+        deploy:
+            replicas: 2
+            restart_policy:
+                condition: on-failure
+
+secrets:
+    UPSTACK_REDIS_REST_TOKEN:
+        external: true
+    TELEGRAM_BOT_TOKEN:
+        external: true
+
+networks:
+    bot-server-network:
+        name: bot-server-network
+        driver: overlay
