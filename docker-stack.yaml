@@ -1,26 +1,32 @@
 version: "3.8"
 
 services:
-    application:
+    bot_server:
         image: ghcr.io/project-email-forwarding-telegram-bot/bot-server:latest
         ports:
             - "8443:8443"
-
+        environment:
+            - ENVIRONMENT=production
         secrets:
-            - UPSTACK_REDIS_REST_TOKEN
+            - REDIS_REST_TOKEN
             - TELEGRAM_BOT_TOKEN
         deploy:
             replicas: 2
             restart_policy:
                 condition: on-failure
+            labels:
+                - "traefik.enable=true"
+                - "traefik.http.routers.bot_server.rule=Host(`bot-server.email-forwarding-telegram-bot.cfd`)"
+                - "traefik.http.routers.bot_server.tls.certresolver=acmeResolver"
+                - "traefik.http.services.bot_server.loadbalancer.server.port=8443"
+                - "traefik.http.services.bot_server.server.scheme=http"
 
 secrets:
-    UPSTACK_REDIS_REST_TOKEN:
+    REDIS_REST_TOKEN:
         external: true
     TELEGRAM_BOT_TOKEN:
         external: true
 
 networks:
-    bot-server-network:
-        name: bot-server-network
-        driver: overlay
+    traefik_default:
+        external: true
