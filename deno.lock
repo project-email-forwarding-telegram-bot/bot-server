@@ -3,6 +3,7 @@
   "specifiers": {
     "jsr:@std/assert@1": "1.0.14",
     "jsr:@std/internal@^1.0.10": "1.0.10",
+    "npm:@types/node@^24.6.2": "24.6.2",
     "npm:@upstash/redis@*": "1.35.4",
     "npm:@upstash/redis@^1.35.4": "1.35.4"
   },
@@ -18,6 +19,12 @@
     }
   },
   "npm": {
+    "@types/node@24.6.2": {
+      "integrity": "sha512-d2L25Y4j+W3ZlNAeMKcy7yDsK425ibcAOO2t7aPTz6gNMH0z2GThtwENCDc0d/Pw9wgyRqE5Px1wkV7naz8ang==",
+      "dependencies": [
+        "undici-types"
+      ]
+    },
     "@upstash/redis@1.35.4": {
       "integrity": "sha512-WE1ZnhFyBiIjTDW13GbO6JjkiMVVjw5VsvS8ENmvvJsze/caMQ5paxVD44+U68IUVmkXcbsLSoE+VIYsHtbQEw==",
       "dependencies": [
@@ -26,11 +33,15 @@
     },
     "uncrypto@0.1.3": {
       "integrity": "sha512-Ql87qFHB3s/De2ClA9e0gsnS6zXG27SkTiSJwjCc9MebbfapQfuPzumMIUMi38ezPZVNFcHI9sUIepeQfw8J8Q=="
+    },
+    "undici-types@7.13.0": {
+      "integrity": "sha512-Ov2Rr9Sx+fRgagJ5AX0qvItZG/JKKoBRAVITs1zk7IqZGTJUwgUr7qoYBpWwakpWilTZFM98rG/AFRocu10iIQ=="
     }
   },
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1",
+      "npm:@types/node@^24.6.2",
       "npm:@upstash/redis@^1.35.4"
     ]
   }
