@@ -13,7 +13,7 @@ class kv_store {
     }
 
     async set(key: string, value: unknown): Promise<void> {
-        await this.redis.set<{ version: string; value: unknown }>(key, { version: global.VERSION, value });
+        await this.redis.set<{ version: string; value: unknown }>(key, { version: global.version, value });
         console.log("kv_store set value:", value);
     }
 
