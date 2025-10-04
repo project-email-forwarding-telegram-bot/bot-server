@@ -5,8 +5,8 @@ class kv_store {
 
     constructor(public url: string, public token: string) {
         this.redis = new Redis({
-            url: "https://special-racer-10669.upstash.io",
-            token: Deno.env.get("REDIS_REST_TOKEN"),
+            url,
+            token,
             keepAlive: true,
         });
     }
