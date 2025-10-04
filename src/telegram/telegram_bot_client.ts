@@ -19,7 +19,16 @@ class telegram_bot_client {
         request: i_telegram_bot_client_request_base,
     ): Promise<telegram_bot_client_response_type> {
         try {
-            const response = await fetch(this.telegram_api_base_url + "/bot" + this.bot_token + request.path, {
+            const url = new URL(this.telegram_api_base_url + "/bot" + this.bot_token + request.path);
+            const params = request.params;
+
+            if (params != null) {
+                for (const [key, value] of Object.entries(params)) {
+                    url.searchParams.append(key, value);
+                }
+            }
+
+            const response = await fetch(url, {
                 method: request.method,
             });
 
