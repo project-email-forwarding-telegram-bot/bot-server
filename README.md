@@ -110,3 +110,7 @@ The project includes Docker configuration for containerized deployment.
 
 - `GET /health` - Health check endpoint returning version and commit SHA
 - `POST /webhook` - Telegram webhook endpoint for receiving bot messages
+
+## References
+
+- [Telegram Bot API Documentation](https://core.telegram.org/bots/api) - Complete documentation for the Telegram Bot API
