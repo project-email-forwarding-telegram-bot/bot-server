@@ -19,7 +19,7 @@ services:
                 - "traefik.http.routers.bot_server.rule=Host(`bot-server.email-forwarding-telegram-bot.cfd`)"
                 - "traefik.http.routers.bot_server.tls.certresolver=acmeResolver"
                 - "traefik.http.services.bot_server.loadbalancer.server.port=8443"
-                - "traefik.http.services.bot_server.server.scheme=http"
+                - "traefik.http.services.bot_server.servers.scheme=http"
 
 secrets:
     REDIS_REST_TOKEN:
