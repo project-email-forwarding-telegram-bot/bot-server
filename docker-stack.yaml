@@ -1,25 +1,45 @@
 version: "3.8"
 
 services:
+    traefik:
+        image: traefik:latest
+        ports:
+            - "80:80"
+            - "443:443"
+            - "8080:8080"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - /etc/traefik:/etc/traefik
+
+        networks:
+            - traefik_default
+        deploy:
+            placement:
+                constraints:
+                    - node.role == manager
+            restart_policy:
+                condition: on-failure
+
     bot_server:
         image: ghcr.io/project-email-forwarding-telegram-bot/bot-server:latest
-        ports:
-            - "8443:8443"
         environment:
             - ENVIRONMENT=production
         secrets:
             - REDIS_REST_TOKEN
             - TELEGRAM_BOT_TOKEN
+        networks:
+            - traefik_default
         deploy:
-            replicas: 2
+            replicas: 1
             restart_policy:
                 condition: on-failure
             labels:
                 - "traefik.enable=true"
                 - "traefik.http.routers.bot_server.rule=Host(`bot-server.email-forwarding-telegram-bot.cfd`)"
                 - "traefik.http.routers.bot_server.tls.certresolver=acmeResolver"
+                - "traefik.http.routers.bot_server.entrypoints=websecure"
                 - "traefik.http.services.bot_server.loadbalancer.server.port=8443"
-                - "traefik.http.services.bot_server.servers.scheme=http"
+                - "traefik.http.services.bot_server.loadbalancer.server.scheme=http"
 
 secrets:
     REDIS_REST_TOKEN:
@@ -29,4 +49,5 @@ secrets:
 
 networks:
     traefik_default:
-        external: true
+        driver: overlay
+        attachable: true
