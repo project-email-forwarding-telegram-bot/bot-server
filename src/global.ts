@@ -75,7 +75,7 @@ export const global = {
     WEBHOOK_PORT: 8443,
     commit_sha,
     version: config.version,
-    HOSTNAME: "ip.email-forwarding-telegram-bot.cfd",
+    HOSTNAME: "bot-server.email-forwarding-telegram-bot.cfd",
     environment,
     config,
     global_secret_manager,
